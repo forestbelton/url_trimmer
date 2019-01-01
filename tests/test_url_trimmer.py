@@ -1,5 +1,5 @@
 import pytest
-from remove_tracking import ClipboardThread
+from url_trimmer.url_trimmer import ClipboardThread
 
 @pytest.mark.parametrize('before,stripped', [
     ('https://open.spotify.com/track/1PLEtjblh2EHJlVVIDB84O?si=TQEmHpn1Vf2kNvdcRT87Ng', 'https://open.spotify.com/track/1PLEtjblh2EHJlVVIDB84O'),

@@ -3,7 +3,7 @@ from re import sub
 from threading import Thread
 from time import sleep
 
-from clipboard import WindowsTextClipboard
+from url_trimmer.clipboard import WindowsTextClipboard
 
 class ClipboardThread(Thread):
     SLEEP_INTERVAL = 0.1
