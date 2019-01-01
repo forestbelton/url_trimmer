@@ -1,5 +1,6 @@
 from .text_clipboard import TextClipboard
 
+
 class StubClipboard(TextClipboard):
     def __init__(self):
         self.__text = ''
