@@ -4,7 +4,7 @@ from url_trimmer.clipboard.stub_clipboard import StubClipboard
 clipboard = StubClipboard()
 
 
-def test_remove_tracking__matches_url_pattern():
+def test_remove_tracking__matches_url_pattern() -> None:
     raw = 'https://open.spotify.com/track/1PLEtjblh2EHJlVVIDB84O?si=TQEmHpn1Vf2kNvdcRT87Ng'
     stripped = 'https://open.spotify.com/track/1PLEtjblh2EHJlVVIDB84O'
     thread = ClipboardThread(clipboard, [r'(https?://open.spotify.com/track/.+?)(\?[^\s]+)'])
@@ -22,7 +22,7 @@ def test_remove_tracking__matches_url_pattern():
     assert middle == f'A {stripped} B'
 
 
-def test_remove_tracking__no_match():
+def test_remove_tracking__no_match() -> None:
     orig = 'there is no match here'
     thread = ClipboardThread(clipboard)
 

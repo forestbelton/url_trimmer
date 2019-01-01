@@ -5,7 +5,7 @@ from .text_clipboard import TextClipboard
 
 
 class WindowsTextClipboard(TextClipboard):
-    def get(self):
+    def get(self) -> str:
         text = ''
 
         try:
@@ -18,7 +18,7 @@ class WindowsTextClipboard(TextClipboard):
 
         return text
 
-    def set(self, text):
+    def set(self, text: str) -> str:
         OpenClipboard()
         EmptyClipboard()
         SetClipboardText(text)
