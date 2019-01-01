@@ -3,7 +3,7 @@ from re import sub
 from threading import Thread
 from time import sleep
 
-from url_trimmer.clipboard import WindowsTextClipboard
+from url_trimmer.clipboard.windows_text_clipboard import WindowsTextClipboard
 
 
 class ClipboardThread(Thread):
