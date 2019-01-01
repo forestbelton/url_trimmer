@@ -3,16 +3,19 @@ import re
 import threading
 import time
 
+from .clipboard.text_clipboard import TextClipboard
+from typing import Sequence
+
 
 class ClipboardThread(threading.Thread):
     SLEEP_INTERVAL = 0.1
 
-    def __init__(self, clipboard, filters=[]):
+    def __init__(self, clipboard: TextClipboard, filters: Sequence[str] = []) -> None:
         threading.Thread.__init__(self)
         self.__clipboard = clipboard
         self.__filters = filters
 
-    def run(self):
+    def run(self) -> None:
         print('Starting!', flush=True)
 
         while True:
@@ -26,5 +29,5 @@ class ClipboardThread(threading.Thread):
 
             time.sleep(ClipboardThread.SLEEP_INTERVAL)
 
-    def remove_tracking(self, text):
+    def remove_tracking(self, text: str) -> str:
         return functools.reduce(lambda t, f: re.sub(f, r'\1', t), self.__filters, text)

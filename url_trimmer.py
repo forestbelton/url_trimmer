@@ -1,5 +1,5 @@
-from clipboard_thread import ClipboardThread
-from clipboard.windows_text_clipboard import WindowsTextClipboard
+from url_trimmer.clipboard_thread import ClipboardThread
+from url_trimmer.clipboard.windows_text_clipboard import WindowsTextClipboard
 
 if __name__ == '__main__':
     filters = [
