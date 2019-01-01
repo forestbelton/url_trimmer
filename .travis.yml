@@ -1,4 +1,5 @@
 language: python
+os: windows
 before_install:
   - pip install pipenv
 install:
