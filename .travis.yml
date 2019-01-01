@@ -7,7 +7,7 @@ before_install:
   - python -m pip install --upgrade pip wheel
   - pip install pipenv
 install:
-  - pipenv install --dev --deploy
+  - pipenv install --dev --system --deploy
 script:
   - pipenv run flake8
   - pipenv run pytest
