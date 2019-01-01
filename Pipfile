@@ -8,6 +8,7 @@ url_trimmer = "python url_trimmer/url_trimmer.py"
 
 [dev-packages]
 pylint = "*"
+flake8 = "*"
 
 [packages]
 pywin32 = "*"

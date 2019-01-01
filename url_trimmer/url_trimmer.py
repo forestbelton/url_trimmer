@@ -5,6 +5,7 @@ from time import sleep
 
 from url_trimmer.clipboard import WindowsTextClipboard
 
+
 class ClipboardThread(Thread):
     SLEEP_INTERVAL = 0.1
     URL_FILTERS = [
@@ -32,6 +33,7 @@ class ClipboardThread(Thread):
     @staticmethod
     def remove_tracking(text):
         return reduce(lambda t, f: sub(f, r'\1', t), ClipboardThread.URL_FILTERS, text)
+
 
 if __name__ == '__main__':
     clipboard = WindowsTextClipboard()
