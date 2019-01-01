@@ -19,6 +19,8 @@ class ClipboardThread(threading.Thread):
         self.__clipboard = clipboard
 
     def run(self):
+        print('Starting!', flush=True)
+
         while True:
             text = self.__clipboard.get()
 
