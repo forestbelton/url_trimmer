@@ -1,4 +1,4 @@
-from url_trimmer.url_trimmer import ClipboardThread
+from url_trimmer.clipboard_thread import ClipboardThread
 from url_trimmer.clipboard.stub_clipboard import StubClipboard
 
 clipboard = StubClipboard()
