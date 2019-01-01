@@ -1,14 +1,11 @@
-import abc
-import re
-import sys
-import threading
-import time
-import win32clipboard
-
 from functools import reduce
+from re import sub
+from threading import Thread
+from time import sleep
 
+from clipboard import WindowsTextClipboard
 
-class ClipboardThread(threading.Thread):
+class ClipboardThread(Thread):
     SLEEP_INTERVAL = 0.1
     URL_FILTERS = [
         r'(https?://open.spotify.com/track/.+?)(\?[^\s]+)',
@@ -30,42 +27,11 @@ class ClipboardThread(threading.Thread):
                     self.__clipboard.set(pruned)
                     print(f'Pruned "{text}" to "{pruned}"', flush=True)
 
-            time.sleep(ClipboardThread.SLEEP_INTERVAL)
+            sleep(ClipboardThread.SLEEP_INTERVAL)
 
     @staticmethod
     def remove_tracking(text):
-        return reduce(lambda t, f: re.sub(f, r'\1', t), ClipboardThread.URL_FILTERS, text)
-
-
-class TextClipboard(abc.ABC):
-    @abc.abstractmethod
-    def get(self):
-        pass
-
-    @abc.abstractmethod
-    def set(self, text):
-        pass
-
-
-class WindowsTextClipboard(TextClipboard):
-    def get(self):
-        text = ''
-
-        try:
-            win32clipboard.OpenClipboard()
-            text = win32clipboard.GetClipboardData()
-            win32clipboard.CloseClipboard()
-        except Exception as err:
-            print(f'failed to retrieve clipboard data: {type(err)} {err}', file=sys.stderr)
-
-        return text
-
-    def set(self, text):
-        win32clipboard.OpenClipboard()
-        win32clipboard.EmptyClipboard()
-        win32clipboard.SetClipboardText(text)
-        win32clipboard.CloseClipboard()
-
+        return reduce(lambda t, f: sub(f, r'\1', t), ClipboardThread.URL_FILTERS, text)
 
 if __name__ == '__main__':
     clipboard = WindowsTextClipboard()
