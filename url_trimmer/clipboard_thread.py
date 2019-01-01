@@ -8,6 +8,7 @@ class ClipboardThread(threading.Thread):
     SLEEP_INTERVAL = 0.1
 
     def __init__(self, clipboard, filters=[]):
+        threading.Thread.__init__(self)
         self.__clipboard = clipboard
         self.__filters = filters
 
@@ -18,7 +19,7 @@ class ClipboardThread(threading.Thread):
             text = self.__clipboard.get()
 
             if len(text) != 0:
-                pruned = ClipboardThread.remove_tracking(text)
+                pruned = self.remove_tracking(text)
                 if pruned != text:
                     self.__clipboard.set(pruned)
                     print(f'Pruned "{text}" to "{pruned}"', flush=True)
