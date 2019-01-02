@@ -40,5 +40,6 @@ def main():
     logging.info('Starting system tray icon')
     icon.run()
 
+
 if __name__ == '__main__':
     main()
