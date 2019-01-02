@@ -17,7 +17,7 @@ class WindowsTextClipboard(TextClipboard):
             OpenClipboard()
             text = GetClipboardData()
             CloseClipboard()
-        except TypeError as ex:
+        except Exception as ex:
             if len(ex.args) == 0 or ex.args[0] not in ALLOWED_ERRORS:
                 logging.error(f'Failed to retrieve clipboard data: {ex}')
 
