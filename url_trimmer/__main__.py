@@ -1,3 +1,4 @@
+import logging
 from pystray import Icon, Menu, MenuItem
 from PIL import Image
 
@@ -12,13 +13,22 @@ DEFAULT_FILTERS = [
 
 
 def close_app(icon, item):
+    logging.info('Waiting for clipboard thread to exit')
     thread.stop()
+    thread.join()
+
+    logging.info('Stopping system tray icon')
     icon.stop()
 
 
 def main():
+    logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', level=logging.INFO)
+    logging.info('URL Trimmer boot!')
+
     global thread
     thread = ClipboardThread(WindowsTextClipboard(), DEFAULT_FILTERS)
+
+    logging.info('Starting clipboard thread')
     thread.start()
 
     image = Image.open('icon.png')
@@ -27,6 +37,7 @@ def main():
         MenuItem('Exit', close_app)
     ))
 
+    logging.info('Starting system tray icon')
     icon.run()
 
 if __name__ == '__main__':

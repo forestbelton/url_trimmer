@@ -1,4 +1,5 @@
 import functools
+import logging
 import re
 import threading
 import time
@@ -17,7 +18,7 @@ class ClipboardThread(threading.Thread):
         self.__stop_event = threading.Event()
 
     def run(self) -> None:
-        print('Starting!', flush=True)
+        logging.info('Clipboard thread started')
 
         while not self.__stop_event.is_set():
             text = self.__clipboard.get()
@@ -26,7 +27,7 @@ class ClipboardThread(threading.Thread):
                 pruned = self.remove_tracking(text)
                 if pruned != text:
                     self.__clipboard.set(pruned)
-                    print(f'Pruned "{text}" to "{pruned}"', flush=True)
+                    logging.info('Successfully trimmed clipboard, updating')
 
             time.sleep(ClipboardThread.SLEEP_INTERVAL)
 

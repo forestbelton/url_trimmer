@@ -1,4 +1,4 @@
-from sys import stderr
+import logging
 from win32clipboard import OpenClipboard, GetClipboardData, EmptyClipboard, SetClipboardText, \
     CloseClipboard
 from .text_clipboard import TextClipboard
@@ -19,7 +19,7 @@ class WindowsTextClipboard(TextClipboard):
             CloseClipboard()
         except TypeError as ex:
             if len(ex.args) == 0 or ex.args[0] not in ALLOWED_ERRORS:
-                print(f'Failed to retrieve clipboard data: {ex}', file=stderr, flush=True)
+                logging.error(f'Failed to retrieve clipboard data: {ex}')
 
         return text
 
