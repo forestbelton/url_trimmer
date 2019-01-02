@@ -14,6 +14,7 @@ mypy = "*"
 
 [packages]
 pywin32 = "*"
+pystray = "*"
 
 [requires]
 python_version = "3.7"
