@@ -23,8 +23,12 @@ class WindowsTextClipboard(TextClipboard):
 
         return text
 
-    def set(self, text: str) -> str:
-        OpenClipboard()
-        EmptyClipboard()
-        SetClipboardText(text)
-        CloseClipboard()
+    def set(self, text: str) -> None:
+        try:
+            OpenClipboard()
+            EmptyClipboard()
+            SetClipboardText(text)
+            CloseClipboard()
+        except Exception as ex:
+            if len(ex.args) == 0 or ex.args[0] not in ALLOWED_ERRORS:
+                logging.error(f'Failed to set clipboard text: {ex}')
