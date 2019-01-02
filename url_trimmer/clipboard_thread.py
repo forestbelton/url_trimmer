@@ -14,11 +14,12 @@ class ClipboardThread(threading.Thread):
         threading.Thread.__init__(self)
         self.__clipboard = clipboard
         self.__filters = filters
+        self.__stop_event = threading.Event()
 
     def run(self) -> None:
         print('Starting!', flush=True)
 
-        while True:
+        while not self.__stop_event.is_set():
             text = self.__clipboard.get()
 
             if len(text) != 0:
@@ -31,3 +32,6 @@ class ClipboardThread(threading.Thread):
 
     def remove_tracking(self, text: str) -> str:
         return functools.reduce(lambda t, f: re.sub(f, r'\1', t), self.__filters, text)
+
+    def stop(self) -> None:
+        self.__stop_event.set()
